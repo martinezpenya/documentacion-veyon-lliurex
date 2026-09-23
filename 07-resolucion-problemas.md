@@ -26,6 +26,20 @@ Solución: en vez de fiar la identificación a un hostname que no resuelve, fija
 
 Este mensaje aparece aunque la clave exista, si tu usuario normal no tiene permiso de lectura sobre el fichero de la clave **privada** (en Linux suele quedar accesible solo para `root` al crearla). La solución es asignarle un grupo de acceso del que sea miembro tu usuario, desde **"Claves de autenticación"** en el Configurador. Pasos detallados en [`02-generacion-claves.md`](02-generacion-claves.md), sección 2.4.
 
+## Al importar la clave, el diálogo busca ficheros `*.perm` en vez de `*.pem` (Linux)
+
+En Linux, el diálogo **"Importar" (Import)** de la página **"Claves de autenticación"** del Configurador puede mostrar el filtro de ficheros `*.perm` en lugar de `*.pem` (parece un bug de Veyon). Como consecuencia, el fichero de la clave (por ejemplo `veyon-aula-profesor.pem`) **no aparece en la lista** aunque esté en la carpeta correcta, y parece que no exista.
+
+El diálogo no ofrece la opción **"Todos los ficheros" (All files)**, así que no se puede cambiar el filtro.
+
+Solución (comprobada): **renombra el fichero de la clave cambiando la extensión `.pem` por `.perm`** y vuelve a importarlo. Desde una terminal, en la carpeta donde está la clave:
+
+```bash
+mv veyon-aula-profesor.pem veyon-aula-profesor.perm
+```
+
+Ahora el fichero sí aparece en el diálogo; selecciónalo e impórtalo con el nombre `Docent` como de costumbre.
+
 ## Puertos y protocolo usados por Veyon
 
 - **TCP 11100**: comunicación entre Veyon Master y Veyon Service (control remoto, autenticación).
