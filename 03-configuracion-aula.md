@@ -55,6 +55,7 @@ En vez de averiguar la MAC de cada portátil y pedir una reserva DHCP por alumno
 
 - `192.168.10.100` / `192.168.10.200`: primera y última IP del rango del DHCP del aula (consúltalo en el servidor/router que reparte las IPs de esa VLAN si no lo administras tú).
 - `Aula-101`: nombre de la ubicación, debe coincidir **exactamente** con la que ya creaste en el paso 3.1.
+- Opcional, un cuarto parámetro con el nombre del fichero de salida. Si no se indica, el CSV se crea en la carpeta desde la que lanzas el script con el nombre `<ubicación>.csv`.
 
 Esto genera `Aula-101.csv` con una línea por cada IP del rango, con nombres genéricos `alu001`, `alu002`, etc.:
 
@@ -63,6 +64,8 @@ computer;alu001;192.168.10.100;;Aula-101
 computer;alu002;192.168.10.101;;Aula-101
 ...
 ```
+
+> Si no conoces el rango exacto del pool DHCP, puedes dar de alta la subred completa del aula (p. ej. de `.1` a `.253` o `.254` en una `/24`). Así también quedarán registradas la puerta de enlace, impresoras u otros equipos de la VLAN, pero no molestan: no tienen `veyon-service`, así que Master los oculta con el filtro **"Solo mostrar equipos encendidos"** (paso 3). El CSV generado es un fichero de trabajo: no lo subas al repositorio.
 
 **2. Impórtalo con `veyon-cli`, en el equipo del profesor** (el mismo donde corren `veyon-configurator` y `Veyon Master`; el backend Builtin guarda los datos en la configuración local de esa máquina):
 
